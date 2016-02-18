@@ -1,5 +1,6 @@
 {
   "version": "1.0.0-*",
+  "authors": [ "JSM85" ],
   "compilationOptions": {
     "emitEntryPoint": true
   },
@@ -29,7 +30,7 @@
   },
 
   "frameworks": {
-    "dnx451": {}
+    "dnx451": { }
   },
 
   "exclude": [

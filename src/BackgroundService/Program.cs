@@ -6,7 +6,7 @@ namespace BackgroundService
 {
     public class Program
     {
-        private static ManualResetEvent _quitEvent = new ManualResetEvent(false);
+        private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
 
         public static void Main(string[] args)
         {
@@ -14,16 +14,16 @@ namespace BackgroundService
             
             Console.CancelKeyPress += (sender, eArgs) =>
             {
-                _quitEvent.Set();
+                QuitEvent.Set();
                 eArgs.Cancel = true;
             };
             
             bus.Subscribe<string>("sub_id", msg =>
             {
-               System.Console.WriteLine(string.Format("Message Received: {0}", msg)); 
+               Console.WriteLine(string.Format("Message Received: {0}", msg)); 
             });
             
-            _quitEvent.WaitOne();
+            QuitEvent.WaitOne();
             
             bus.Dispose();
         }
