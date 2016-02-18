@@ -1,30 +1,24 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using EasyNetQ;
 using Microsoft.AspNet.Mvc;
 
 namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        private IBus _bus = RabbitHutch.CreateBus("host=rabbit");
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public IActionResult SendMessage(string messageTextBox)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            _bus.Publish(messageTextBox);
+            
+            return View("Sent");
         }
 
         public IActionResult Error()
