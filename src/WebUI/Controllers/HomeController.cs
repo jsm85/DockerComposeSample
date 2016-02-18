@@ -1,4 +1,3 @@
-using System;
 using EasyNetQ;
 using Microsoft.AspNet.Mvc;
 
