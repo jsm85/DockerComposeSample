@@ -1,0 +1,14 @@
+ui:
+  image: dockercomposesampleui
+  links:
+    - rabbit:rabbit
+  ports:
+    - "5001:5001"
+service:
+  image: dockercomposesampleservice
+  links:
+    - rabbit:rabbit
+rabbit:
+  image: "rabbitmq:3.6-management"
+  ports:
+    - "15672:15672"
