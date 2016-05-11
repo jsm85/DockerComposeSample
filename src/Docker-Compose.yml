@@ -1,11 +1,19 @@
+haproxy:
+  image: tutum/haproxy
+  links:
+    - ui
+  ports:
+    - "80:80"
+  environment:
+        - BACKEND_PORT=5001
 ui:
-  image: dockercomposesampleui
+  image: jsm85/dockercomposesampleui
   links:
     - rabbit:rabbit
   ports:
-    - "5001:5001"
+    - "5001"
 service:
-  image: dockercomposesampleservice
+  image: jsm85/dockercomposesampleservice
   links:
     - rabbit:rabbit
 rabbit:
